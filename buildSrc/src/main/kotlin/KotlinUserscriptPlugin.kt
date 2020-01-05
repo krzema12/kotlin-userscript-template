@@ -17,9 +17,9 @@ class KotlinUserscriptPlugin : Plugin<Project> {
 
                     val userscriptPreamble = """
                         // ==UserScript==
-                        // @name         Kotlin test
+                        // @name         ${project.name}
                         // @namespace    http://tampermonkey.net/
-                        // @version      0.1
+                        // @version      ${project.version}
                         // @description  try to take over the world!
                         // @author       You
                         // @match        https://www.google.pl/
