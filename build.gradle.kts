@@ -1,5 +1,6 @@
 plugins {
     kotlin("js") version "1.3.61"
+    `kotlin-userscript`
 }
 
 group = "'it.krzeminski"
