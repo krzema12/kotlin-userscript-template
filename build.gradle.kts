@@ -17,3 +17,7 @@ dependencies {
 }
 
 kotlin.target.browser { }
+
+userscript {
+    name = "Kotlin userscript test"
+}

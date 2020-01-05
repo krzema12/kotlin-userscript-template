@@ -4,8 +4,13 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.*
 import java.io.File
 
+open class KotlinUserscriptPluginExtension {
+    var name: String? = null
+}
+
 class KotlinUserscriptPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
+        val extension = project.extensions.create<KotlinUserscriptPluginExtension>("userscript")
         tasks {
             register("generateUserscript") {
                 group = "other"
@@ -17,7 +22,7 @@ class KotlinUserscriptPlugin : Plugin<Project> {
 
                     val userscriptPreamble = """
                         // ==UserScript==
-                        // @name         ${project.name}
+                        // @name         ${extension.name ?: project.name}
                         // @namespace    http://tampermonkey.net/
                         // @version      ${project.version}
                         // @description  try to take over the world!
