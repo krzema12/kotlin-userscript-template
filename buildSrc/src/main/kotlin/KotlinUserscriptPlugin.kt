@@ -10,6 +10,11 @@ open class KotlinUserscriptPluginExtension {
     var description: String? = null
     var inputFilePath: String? = null
     var outputFilePath: String? = null
+    var matchPatterns: List<String> = emptyList()
+
+    fun match(vararg matchPatterns: String) {
+        this.matchPatterns = matchPatterns.toList()
+    }
 }
 
 class KotlinUserscriptPlugin : Plugin<Project> {
@@ -25,16 +30,16 @@ class KotlinUserscriptPlugin : Plugin<Project> {
                     val defaultOutputFilePath = "build/userscript/${project.name}.user.js"
 
                     val userscriptPreamble = """
-                        // ==UserScript==
-                        ${userscriptProperty("name", extension.name ?: project.name)}
-                        ${userscriptProperty("namespace", extension.namespace ?: project.group.toString())}
-                        ${userscriptProperty("version", project.version.toString())}
-                        ${(extension.description ?: project.description)?.let { userscriptProperty("description", it) }}
-                        // @match        https://www.google.pl/
-                        // ==/UserScript==
-                        
-                        
-                    """.trimIndent()
+                        |// ==UserScript==
+                        |${userscriptProperty("name", extension.name ?: project.name)}
+                        |${userscriptProperty("namespace", extension.namespace ?: project.group.toString())}
+                        |${userscriptProperty("version", project.version.toString())}
+                        |${(extension.description ?: project.description)?.let { userscriptProperty("description", it) }}
+                        |${extension.matchPatterns.map { userscriptProperty("match", it) }.joinToString("\n")}
+                        |// ==/UserScript==
+                        |
+                        |
+                    """.trimMargin()
 
                     val bundledJavascript = File(extension.inputFilePath ?: defaultInputFilePath).readText()
                     with(File(extension.outputFilePath ?: defaultOutputFilePath)) {

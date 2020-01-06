@@ -21,4 +21,5 @@ kotlin.target.browser { }
 
 userscript {
     name = "Kotlin userscript test"
+    match("https://www.example.com/*", "http://*.example.com/*")
 }
