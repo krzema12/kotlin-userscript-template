@@ -36,7 +36,11 @@ class KotlinUserscriptPlugin : Plugin<Project> {
                     """.trimIndent()
 
                     val bundledJavascript = File(extension.inputFilePath ?: defaultInputFilePath).readText()
-                    File(extension.outputFilePath ?: defaultOutputFilePath).writeText(userscriptPreamble + bundledJavascript)
+                    with(File(extension.outputFilePath ?: defaultOutputFilePath)) {
+                        parentFile.mkdirs()
+                        createNewFile()
+                        writeText(userscriptPreamble + bundledJavascript)
+                    }
                 }
             }
         }
