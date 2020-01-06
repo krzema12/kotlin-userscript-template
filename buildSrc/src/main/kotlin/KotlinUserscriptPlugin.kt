@@ -22,9 +22,9 @@ class KotlinUserscriptPlugin : Plugin<Project> {
 
                     val userscriptPreamble = """
                         // ==UserScript==
-                        // @name         ${extension.name ?: project.name}
+                        ${userscriptProperty("name", extension.name ?: project.name)}
                         // @namespace    http://tampermonkey.net/
-                        // @version      ${project.version}
+                        ${userscriptProperty("version", project.version.toString())}
                         // @description  try to take over the world!
                         // @author       You
                         // @match        https://www.google.pl/
@@ -40,4 +40,7 @@ class KotlinUserscriptPlugin : Plugin<Project> {
             }
         }
     }
+
+    private fun userscriptProperty(name: String, value: String) =
+        "// @$name $value"
 }
