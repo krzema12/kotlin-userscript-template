@@ -28,9 +28,7 @@ class KotlinUserscriptPlugin : Plugin<Project> {
                         // @namespace    http://tampermonkey.net/
                         ${userscriptProperty("version", project.version.toString())}
                         // @description  try to take over the world!
-                        // @author       You
                         // @match        https://www.google.pl/
-                        // @grant        none
                         // ==/UserScript==
                         
                         
