@@ -6,6 +6,8 @@ import java.io.File
 
 open class KotlinUserscriptPluginExtension {
     var name: String? = null
+    var inputFilePath: String? = null
+    var outputFilePath: String? = null
 }
 
 class KotlinUserscriptPlugin : Plugin<Project> {
@@ -17,8 +19,8 @@ class KotlinUserscriptPlugin : Plugin<Project> {
                 description = "Adds a preamble needed by plugins like Tampermonkey, adds a proper file extension, and other."
                 dependsOn("browserWebpack")
                 doLast {
-                    val pathToInputBundledJavascriptFile = "build/distributions/${project.name}.js"
-                    val pathToOutputUserscriptFile = "build/distributions/${project.name}.user.js"
+                    val defaultInputFilePath = "build/distributions/${project.name}.js"
+                    val defaultOutputFilePath = "build/userscript/${project.name}.user.js"
 
                     val userscriptPreamble = """
                         // ==UserScript==
@@ -34,8 +36,8 @@ class KotlinUserscriptPlugin : Plugin<Project> {
                         
                     """.trimIndent()
 
-                    val bundledJavascript = File(pathToInputBundledJavascriptFile).readText()
-                    File(pathToOutputUserscriptFile).writeText(userscriptPreamble + bundledJavascript)
+                    val bundledJavascript = File(extension.inputFilePath ?: defaultInputFilePath).readText()
+                    File(extension.outputFilePath ?: defaultOutputFilePath).writeText(userscriptPreamble + bundledJavascript)
                 }
             }
         }
