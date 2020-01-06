@@ -5,6 +5,7 @@ plugins {
 
 group = "it.krzeminski"
 version = "1.0-SNAPSHOT"
+description = "Gradle project's description"
 
 repositories {
     mavenCentral()
