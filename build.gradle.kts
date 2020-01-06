@@ -3,7 +3,7 @@ plugins {
     `kotlin-userscript`
 }
 
-group = "'it.krzeminski"
+group = "it.krzeminski"
 version = "1.0-SNAPSHOT"
 
 repositories {
