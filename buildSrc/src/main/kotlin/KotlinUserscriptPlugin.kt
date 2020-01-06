@@ -6,6 +6,7 @@ import java.io.File
 
 open class KotlinUserscriptPluginExtension {
     var name: String? = null
+    var namespace: String? = null
     var inputFilePath: String? = null
     var outputFilePath: String? = null
 }
@@ -25,7 +26,7 @@ class KotlinUserscriptPlugin : Plugin<Project> {
                     val userscriptPreamble = """
                         // ==UserScript==
                         ${userscriptProperty("name", extension.name ?: project.name)}
-                        // @namespace    http://tampermonkey.net/
+                        ${userscriptProperty("namespace", extension.namespace ?: project.group.toString())}
                         ${userscriptProperty("version", project.version.toString())}
                         // @description  try to take over the world!
                         // @match        https://www.google.pl/
