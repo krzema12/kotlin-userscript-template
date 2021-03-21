@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js") version "1.3.61"
+    kotlin("js") version "1.4.31"
     `kotlin-userscript`
 }
 
@@ -12,12 +12,11 @@ repositories {
     jcenter()
 }
 
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-js")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-js")
+kotlin {
+    js {
+        browser()
+    }
 }
-
-kotlin.target.browser { }
 
 userscript {
     name = "Kotlin userscript test"
