@@ -1,6 +1,6 @@
 plugins {
     kotlin("js") version "1.5.21"
-    `kotlin-userscript`
+    id("it.krzeminski.kotlin-userscript") version "0.1.0"
 }
 
 group = "it.krzeminski"
