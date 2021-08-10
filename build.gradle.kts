@@ -1,5 +1,5 @@
 plugins {
-    kotlin("js") version "1.4.31"
+    kotlin("js") version "1.5.21"
     `kotlin-userscript`
 }
 
